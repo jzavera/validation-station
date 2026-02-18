@@ -8,7 +8,7 @@ import type { ValidationState, ValidationAction } from '../context/validationRed
  *   - Tab       -> dispatch NEXT_FIELD (advances to next unconfirmed field)
  *   - Shift+Tab -> dispatch PREV_FIELD (goes to previous field)
  *   - Enter     -> dispatch START_EDIT (enter edit mode on active field)
- *   - Space     -> (reserved for Phase 6: CONFIRM_FIELD)
+ *   - Space     -> dispatch CONFIRM_FIELD (marks active field as confirmed)
  *   - +/=       -> dispatch ZOOM_IN
  *   - -         -> dispatch ZOOM_OUT
  *
@@ -51,10 +51,9 @@ export function useKeyboardNavigation(
         }
 
         case ' ': {
-          // Reserved for Phase 6: CONFIRM_FIELD
-          // Prevent default to avoid page scrolling
           if (state.activeFieldId !== null) {
             e.preventDefault();
+            dispatch({ type: 'CONFIRM_FIELD' });
           }
           break;
         }
