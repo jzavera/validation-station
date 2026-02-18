@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Project scaffold, TypeScript types, sample data, and state management
 - [x] **Phase 2: App Shell** - Two-panel layout with header and status bar
 - [x] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
-- [ ] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
+- [x] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
 - [ ] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
 - [ ] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
 - [ ] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
@@ -75,10 +75,10 @@ Plans:
   2. Pressing Shift+Tab moves focus to the previous field
   3. Clicking any field row in the panel sets it as the active field
   4. When a field becomes active (by Tab or click), the field panel automatically scrolls so the active field is visible
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: TBD
+- [x] 04-01-PLAN.md -- useKeyboardNavigation hook, NEXT_FIELD skip-confirmed logic, FieldRow auto-scroll, wire into App
 
 ### Phase 5: Field Editing
 **Goal**: The operator can edit any field value inline with full keyboard control, and edits are tracked via the dataVersion counter
@@ -162,7 +162,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | 1. Foundation | 2/2 | Complete | 2026-02-18 |
 | 2. App Shell | 1/1 | Complete | 2026-02-18 |
 | 3. Field Display | 1/1 | Complete | 2026-02-18 |
-| 4. Field Navigation | 0/TBD | Not started | - |
+| 4. Field Navigation | 1/1 | Complete | 2026-02-18 |
 | 5. Field Editing | 0/TBD | Not started | - |
 | 6. Field Validation | 0/TBD | Not started | - |
 | 7. Document Rendering | 0/TBD | Not started | - |
