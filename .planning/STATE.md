@@ -5,21 +5,21 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Operator can efficiently review and validate every extracted field by navigating with Tab, editing values inline, and visually confirming each extraction against the highlighted source document region.
-**Current focus:** Phase 6 complete -- ready for Phase 7 (Document Rendering)
+**Current focus:** Phase 7 complete -- ready for Phase 8 (Bounding Box Overlays)
 
 ## Current Position
 
-Phase: 6 of 9 (Field Validation) -- COMPLETE
+Phase: 7 of 9 (Document Rendering) -- COMPLETE
 Plan: 1 of 1 in current phase
 Status: Phase Complete
-Last activity: 2026-02-18 -- Completed 06-01 (Field Validation)
+Last activity: 2026-02-18 -- Completed 07-01 (Document Rendering)
 
-Progress: [######....] 67%
+Progress: [#######...] 78%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 4min
 - Total execution time: 0.5 hours
 
@@ -33,9 +33,10 @@ Progress: [######....] 67%
 | 04-field-navigation | 1 | 4min | 4min |
 | 05-field-editing | 1 | 4min | 4min |
 | 06-field-validation | 1 | 3min | 3min |
+| 07-document-rendering | 1 | 4min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (3min), 03-01 (5min), 04-01 (4min), 05-01 (4min), 06-01 (3min)
+- Last 5 plans: 03-01 (5min), 04-01 (4min), 05-01 (4min), 06-01 (3min), 07-01 (4min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -74,6 +75,11 @@ Recent decisions affecting current work:
 - (05-01) FieldRow click handler only fires onSelect when NOT already active (prevents deselect)
 - (05-01) +/= both trigger ZOOM_IN for keyboard layout compatibility
 - (06-01) Space dispatches CONFIRM_FIELD; all other validation infrastructure was already in place from Phases 1-5
+- (07-01) PdfViewer uses react-pdf Document/Page with renderTextLayer and renderAnnotationLayer enabled
+- (07-01) ImageViewer uses CSS transform for zoom (not width/height) for crisp rendering
+- (07-01) Both viewers wrap content in position:relative divs with data-page-number for Phase 8 overlay targeting
+- (07-01) Error states show centered icon + message fallback rather than crashing
+- (07-01) Outer panel uses overflow-hidden; inner viewers manage their own scrolling
 
 ### Pending Todos
 
@@ -86,5 +92,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 06-01-PLAN.md (Phase 06 complete)
-Resume file: .planning/phases/06-field-validation/06-01-SUMMARY.md
+Stopped at: Completed 07-01-PLAN.md (Phase 07 complete)
+Resume file: .planning/phases/07-document-rendering/07-01-SUMMARY.md

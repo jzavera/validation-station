@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
 - [x] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
 - [x] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
-- [ ] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
+- [x] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
 - [ ] **Phase 8: Bounding Box Overlays** - Token-level and field-level highlights on the document
 - [ ] **Phase 9: Document-Field Synchronization** - Active field triggers document scroll-to-region
 
@@ -118,10 +118,10 @@ Plans:
   2. An image extraction result (PNG/JPG) renders the image in the left panel with the same container structure
   3. The app automatically dispatches to the correct renderer (PDF or image) based on the document.type field in the extraction result
   4. Zoom in/out works via header buttons and keyboard shortcuts (+/-), and the zoom level persists when navigating between fields
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 07-01: TBD
+- [x] 07-01-PLAN.md -- PdfViewer, ImageViewer, DocumentViewer dispatcher, wire into App left panel
 
 ### Phase 8: Bounding Box Overlays
 **Goal**: The operator can see colored highlight overlays on the document showing exactly where the active field's value was extracted from
@@ -165,6 +165,6 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | 4. Field Navigation | 1/1 | Complete | 2026-02-18 |
 | 5. Field Editing | 1/1 | Complete | 2026-02-18 |
 | 6. Field Validation | 1/1 | Complete | 2026-02-18 |
-| 7. Document Rendering | 0/TBD | Not started | - |
+| 7. Document Rendering | 1/1 | Complete | 2026-02-18 |
 | 8. Bounding Box Overlays | 0/TBD | Not started | - |
 | 9. Document-Field Sync | 0/TBD | Not started | - |
