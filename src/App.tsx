@@ -4,6 +4,7 @@ import { useValidation } from './context/useValidation';
 import { sampleExtractionResult } from './data/sampleData';
 import { Header } from './components/Header';
 import { StatusBar } from './components/StatusBar';
+import { FieldPanel } from './components/FieldPanel';
 
 function AppContent() {
   const { state, dispatch } = useValidation();
@@ -31,11 +32,7 @@ function AppContent() {
 
         {/* Right panel: Field panel (45%) */}
         <div className="w-[45%] bg-white overflow-y-auto">
-          <div className="flex items-center justify-center h-full">
-            <span className="text-sm text-gray-500 select-none">
-              Field Panel
-            </span>
-          </div>
+          <FieldPanel />
         </div>
       </main>
 
