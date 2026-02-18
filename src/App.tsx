@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { ValidationProvider } from './context/ValidationProvider';
 import { useValidation } from './context/useValidation';
 import { sampleExtractionResult } from './data/sampleData';
+import { Header } from './components/Header';
+import { StatusBar } from './components/StatusBar';
 
 function AppContent() {
   const { state, dispatch } = useValidation();
@@ -12,66 +14,32 @@ function AppContent() {
     (window as any).__state = state;
   }, [dispatch, state]);
 
-  // Find the active field label for display
-  const activeField = state.activeFieldId
-    ? state.result.fieldGroups
-        .flatMap((g) => g.fields)
-        .find((f) => f.id === state.activeFieldId)
-    : null;
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">
-          Validation Station
-        </h1>
+    <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
+      <Header />
 
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-500 font-medium">Active Field</span>
-            <span className="text-gray-900 font-mono">
-              {state.activeFieldId ?? 'none'}
-            </span>
-          </div>
+      <main className="flex-1 flex min-h-0">
+        {/* Left panel: Document viewer (55%) */}
+        <div className="w-[55%] bg-gray-200 overflow-auto flex items-center justify-center">
+          <span className="text-sm text-gray-500 select-none">
+            Document Viewer
+          </span>
+        </div>
 
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-500 font-medium">Field Label</span>
-            <span className="text-gray-900">
-              {activeField?.label ?? '-'}
-            </span>
-          </div>
+        {/* Vertical divider */}
+        <div className="w-px bg-gray-300 shrink-0" />
 
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-500 font-medium">Zoom</span>
-            <span className="text-gray-900 font-mono">
-              {(state.zoom * 100).toFixed(0)}%
-            </span>
-          </div>
-
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-500 font-medium">Total Fields</span>
-            <span className="text-gray-900 font-mono">
-              {state.fieldOrder.length}
-            </span>
-          </div>
-
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-500 font-medium">Editing</span>
-            <span
-              className={`font-mono ${state.isEditing ? 'text-amber-600' : 'text-gray-400'}`}
-            >
-              {state.isEditing ? 'true' : 'false'}
+        {/* Right panel: Field panel (45%) */}
+        <div className="w-[45%] bg-white overflow-y-auto">
+          <div className="flex items-center justify-center h-full">
+            <span className="text-sm text-gray-500 select-none">
+              Field Panel
             </span>
           </div>
         </div>
+      </main>
 
-        <p className="mt-6 text-xs text-gray-400 leading-relaxed">
-          Open the browser console and use{' '}
-          <code className="bg-gray-100 px-1 rounded">__dispatch</code> /{' '}
-          <code className="bg-gray-100 px-1 rounded">__state</code> to test
-          state management.
-        </p>
-      </div>
+      <StatusBar />
     </div>
   );
 }
