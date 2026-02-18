@@ -6,6 +6,7 @@ import { sampleExtractionResult } from './data/sampleData';
 import { Header } from './components/Header';
 import { StatusBar } from './components/StatusBar';
 import { FieldPanel } from './components/FieldPanel';
+import { DocumentViewer } from './components/DocumentViewer';
 
 function AppContent() {
   const { state, dispatch } = useValidation();
@@ -25,10 +26,8 @@ function AppContent() {
 
       <main className="flex-1 flex min-h-0">
         {/* Left panel: Document viewer (55%) */}
-        <div className="w-[55%] bg-gray-200 overflow-auto flex items-center justify-center">
-          <span className="text-sm text-gray-500 select-none">
-            Document Viewer
-          </span>
+        <div className="w-[55%] bg-gray-200 overflow-hidden">
+          <DocumentViewer />
         </div>
 
         {/* Vertical divider */}
