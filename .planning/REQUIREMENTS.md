@@ -23,12 +23,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Field Display
 
-- [ ] **FIELD-01**: Fields are displayed organized by field groups, each group with a visible label/header
-- [ ] **FIELD-02**: Each field row shows: confidence indicator, field label, and extracted value
-- [ ] **FIELD-03**: Confidence indicator shows red dot for <0.7, yellow dot for 0.7-0.9, green dot for >=0.9
-- [ ] **FIELD-04**: Confirmed fields show a green checkmark instead of the confidence dot
-- [ ] **FIELD-05**: Missing fields show a dash icon with gray styling
-- [ ] **FIELD-06**: Active field is visually highlighted with a blue ring/border in the field panel
+- [x] **FIELD-01**: Fields are displayed organized by field groups, each group with a visible label/header
+- [x] **FIELD-02**: Each field row shows: confidence indicator, field label, and extracted value
+- [x] **FIELD-03**: Confidence indicator shows red dot for <0.7, yellow dot for 0.7-0.9, green dot for >=0.9
+- [x] **FIELD-04**: Confirmed fields show a green checkmark instead of the confidence dot
+- [x] **FIELD-05**: Missing fields show a dash icon with gray styling
+- [x] **FIELD-06**: Active field is visually highlighted with a blue ring/border in the field panel
 
 ### Field Navigation
 
@@ -122,12 +122,12 @@ Deferred to future release. Tracked but not in current roadmap.
 | LAYOUT-01 | Phase 2 | Pending |
 | LAYOUT-02 | Phase 2 | Pending |
 | LAYOUT-03 | Phase 2 | Pending |
-| FIELD-01 | Phase 3 | Pending |
-| FIELD-02 | Phase 3 | Pending |
-| FIELD-03 | Phase 3 | Pending |
-| FIELD-04 | Phase 3 | Pending |
-| FIELD-05 | Phase 3 | Pending |
-| FIELD-06 | Phase 3 | Pending |
+| FIELD-01 | Phase 3 | Done |
+| FIELD-02 | Phase 3 | Done |
+| FIELD-03 | Phase 3 | Done |
+| FIELD-04 | Phase 3 | Done |
+| FIELD-05 | Phase 3 | Done |
+| FIELD-06 | Phase 3 | Done |
 | NAV-01 | Phase 4 | Pending |
 | NAV-02 | Phase 4 | Pending |
 | NAV-03 | Phase 4 | Pending |

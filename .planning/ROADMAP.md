@@ -13,8 +13,8 @@ Validation Station is a standalone React + TypeScript app for human validation o
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Project scaffold, TypeScript types, sample data, and state management
-- [ ] **Phase 2: App Shell** - Two-panel layout with header and status bar
-- [ ] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
+- [x] **Phase 2: App Shell** - Two-panel layout with header and status bar
+- [x] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
 - [ ] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
 - [ ] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
 - [ ] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
@@ -61,10 +61,10 @@ Plans:
   2. Each field row shows a confidence dot (red for <0.7, yellow for 0.7-0.9, green for >=0.9), the field label, and the extracted value
   3. Confirmed fields display a green checkmark instead of the confidence dot, and missing fields show a dash icon with gray styling
   4. Clicking a field row highlights it with a visible blue ring/border, distinguishing the active field from all others
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 03-01: TBD
+- [x] 03-01-PLAN.md — Build confidence utility, ConfidenceBadge, FieldRow, FieldGroupCard, FieldPanel components, and wire into App right panel
 
 ### Phase 4: Field Navigation
 **Goal**: The operator can navigate between fields using keyboard and mouse, with the field panel scrolling to keep the active field visible
@@ -161,7 +161,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-02-18 |
 | 2. App Shell | 1/1 | Complete | 2026-02-18 |
-| 3. Field Display | 0/TBD | Not started | - |
+| 3. Field Display | 1/1 | Complete | 2026-02-18 |
 | 4. Field Navigation | 0/TBD | Not started | - |
 | 5. Field Editing | 0/TBD | Not started | - |
 | 6. Field Validation | 0/TBD | Not started | - |
