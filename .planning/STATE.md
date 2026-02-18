@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Operator can efficiently review and validate every extracted field by navigating with Tab, editing values inline, and visually confirming each extraction against the highlighted source document region.
-**Current focus:** Phase 4 complete -- ready for Phase 5 (Field Editing)
+**Current focus:** Phase 5 complete -- ready for Phase 6 (Field Validation)
 
 ## Current Position
 
-Phase: 4 of 9 (Field Navigation) -- COMPLETE
+Phase: 5 of 9 (Field Editing) -- COMPLETE
 Plan: 1 of 1 in current phase
 Status: Phase Complete
-Last activity: 2026-02-18 -- Completed 04-01 (Field Navigation)
+Last activity: 2026-02-18 -- Completed 05-01 (Inline Field Editing)
 
-Progress: [####......] 44%
+Progress: [#####.....] 55%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 4min
-- Total execution time: 0.3 hours
+- Total execution time: 0.4 hours
 
 **By Phase:**
 
@@ -31,9 +31,10 @@ Progress: [####......] 44%
 | 02-app-shell | 1 | 3min | 3min |
 | 03-field-display | 1 | 5min | 5min |
 | 04-field-navigation | 1 | 4min | 4min |
+| 05-field-editing | 1 | 4min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (2min), 02-01 (3min), 03-01 (5min), 04-01 (4min)
+- Last 5 plans: 01-02 (2min), 02-01 (3min), 03-01 (5min), 04-01 (4min), 05-01 (4min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -67,6 +68,10 @@ Recent decisions affecting current work:
 - (04-01) PREV_FIELD does not skip confirmed (matches Rossum pattern)
 - (04-01) useKeyboardNavigation respects isEditing for Phase 5 integration
 - (04-01) scrollIntoView with block: 'nearest' avoids unnecessary scrolling
+- (05-01) EditableValue confirms on blur to prevent lost edits when clicking elsewhere
+- (05-01) Global handler checks target.tagName to skip INPUT/TEXTAREA elements
+- (05-01) FieldRow click handler only fires onSelect when NOT already active (prevents deselect)
+- (05-01) +/= both trigger ZOOM_IN for keyboard layout compatibility
 
 ### Pending Todos
 
@@ -79,5 +84,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 04-01-PLAN.md (Phase 04 complete)
-Resume file: .planning/phases/04-field-navigation/04-01-SUMMARY.md
+Stopped at: Completed 05-01-PLAN.md (Phase 05 complete)
+Resume file: .planning/phases/05-field-editing/05-01-SUMMARY.md

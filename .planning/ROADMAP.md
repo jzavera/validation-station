@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: App Shell** - Two-panel layout with header and status bar
 - [x] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
 - [x] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
-- [ ] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
+- [x] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
 - [ ] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
 - [ ] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
 - [ ] **Phase 8: Bounding Box Overlays** - Token-level and field-level highlights on the document
@@ -90,10 +90,10 @@ Plans:
   3. Pressing Tab while editing confirms the edit and advances to the next unconfirmed field in one action
   4. Each confirmed edit increments the field's dataVersion counter (visible in state)
   5. While in edit mode, keyboard shortcuts (Tab for navigation, Space for confirm, +/- for zoom) are suppressed and do not trigger their normal actions
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 05-01: TBD
+- [x] 05-01-PLAN.md -- EditableValue component, FieldRow editing integration, useKeyboardNavigation Enter/+/-/Space support
 
 ### Phase 6: Field Validation
 **Goal**: The operator can confirm individual fields or all remaining fields at once, with confirmed fields tracked and skipped during navigation
@@ -163,7 +163,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | 2. App Shell | 1/1 | Complete | 2026-02-18 |
 | 3. Field Display | 1/1 | Complete | 2026-02-18 |
 | 4. Field Navigation | 1/1 | Complete | 2026-02-18 |
-| 5. Field Editing | 0/TBD | Not started | - |
+| 5. Field Editing | 1/1 | Complete | 2026-02-18 |
 | 6. Field Validation | 0/TBD | Not started | - |
 | 7. Document Rendering | 0/TBD | Not started | - |
 | 8. Bounding Box Overlays | 0/TBD | Not started | - |
