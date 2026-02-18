@@ -1,0 +1,18 @@
+{
+  "mode": "yolo",
+  "depth": "comprehensive",
+  "parallelization": true,
+  "commit_docs": true,
+  "model_profile": "quality",
+  "workflow": {
+    "research": false,
+    "plan_check": true,
+    "verifier": true
+  },
+  "team_roles": {
+    "architect": "Ensures implementation follows the plan, reviews component design, validates architecture decisions",
+    "coder": "Implements features according to the plan",
+    "test_writer": "Writes unit tests for each component/feature",
+    "tester": "Runs tests and verifies features work end-to-end after each build"
+  }
+}
