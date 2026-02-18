@@ -2,16 +2,19 @@ import { useEffect } from 'react';
 import type { ValidationState, ValidationAction } from '../context/validationReducer';
 
 /**
- * Global keyboard listener for field navigation.
+ * Global keyboard listener for field navigation and editing.
  *
- * - Tab → dispatch NEXT_FIELD (advances to next unconfirmed field)
- * - Shift+Tab → dispatch PREV_FIELD (goes to previous field)
+ * When NOT editing (state.isEditing === false):
+ *   - Tab       -> dispatch NEXT_FIELD (advances to next unconfirmed field)
+ *   - Shift+Tab -> dispatch PREV_FIELD (goes to previous field)
+ *   - Enter     -> dispatch START_EDIT (enter edit mode on active field)
+ *   - Space     -> (reserved for Phase 6: CONFIRM_FIELD)
+ *   - +/=       -> dispatch ZOOM_IN
+ *   - -         -> dispatch ZOOM_OUT
  *
- * When `state.isEditing` is true, Tab/Shift+Tab are NOT intercepted
- * so the EditableValue component (Phase 5) can handle them instead.
- *
- * Tab's default browser behavior (focus cycling) is always prevented
- * when we handle the event.
+ * When editing (state.isEditing === true):
+ *   All shortcuts are suppressed (EDIT-07). The EditableValue component
+ *   handles its own key events and stops propagation.
  */
 export function useKeyboardNavigation(
   state: ValidationState,
@@ -19,17 +22,58 @@ export function useKeyboardNavigation(
 ): void {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      // Don't intercept while editing -- let the input handle Tab
+      // Don't intercept while editing -- let the input handle all keys (EDIT-07)
       if (state.isEditing) return;
 
-      if (e.key === 'Tab') {
-        e.preventDefault();
+      // Don't intercept if user is typing in another input/textarea
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
 
-        if (e.shiftKey) {
-          dispatch({ type: 'PREV_FIELD' });
-        } else {
-          dispatch({ type: 'NEXT_FIELD' });
+      switch (e.key) {
+        case 'Tab': {
+          e.preventDefault();
+          if (e.shiftKey) {
+            dispatch({ type: 'PREV_FIELD' });
+          } else {
+            dispatch({ type: 'NEXT_FIELD' });
+          }
+          break;
         }
+
+        case 'Enter': {
+          if (state.activeFieldId !== null) {
+            e.preventDefault();
+            dispatch({ type: 'START_EDIT' });
+          }
+          break;
+        }
+
+        case ' ': {
+          // Reserved for Phase 6: CONFIRM_FIELD
+          // Prevent default to avoid page scrolling
+          if (state.activeFieldId !== null) {
+            e.preventDefault();
+          }
+          break;
+        }
+
+        case '+':
+        case '=': {
+          e.preventDefault();
+          dispatch({ type: 'ZOOM_IN' });
+          break;
+        }
+
+        case '-': {
+          e.preventDefault();
+          dispatch({ type: 'ZOOM_OUT' });
+          break;
+        }
+
+        default:
+          break;
       }
     }
 
@@ -37,5 +81,5 @@ export function useKeyboardNavigation(
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [state.isEditing, dispatch]);
+  }, [state.isEditing, state.activeFieldId, dispatch]);
 }

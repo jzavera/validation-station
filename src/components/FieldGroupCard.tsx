@@ -1,10 +1,13 @@
 import type { FieldGroup } from '../types/extraction';
+import type { ValidationAction } from '../context/validationReducer';
 import { FieldRow } from './FieldRow';
 
 interface FieldGroupCardProps {
   group: FieldGroup;
   activeFieldId: string | null;
+  isEditing: boolean;
   onSelectField: (fieldId: string) => void;
+  dispatch: React.Dispatch<ValidationAction>;
 }
 
 /**
@@ -13,7 +16,9 @@ interface FieldGroupCardProps {
 export function FieldGroupCard({
   group,
   activeFieldId,
+  isEditing,
   onSelectField,
+  dispatch,
 }: FieldGroupCardProps) {
   return (
     <section className="mb-4">
@@ -29,7 +34,9 @@ export function FieldGroupCard({
             key={field.id}
             field={field}
             isActive={field.id === activeFieldId}
+            isEditing={isEditing}
             onSelect={onSelectField}
+            dispatch={dispatch}
           />
         ))}
       </div>

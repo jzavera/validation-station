@@ -8,7 +8,7 @@ import { FieldGroupCard } from './FieldGroupCard';
 export function FieldPanel() {
   const { state, dispatch } = useValidation();
 
-  const { result, activeFieldId } = state;
+  const { result, activeFieldId, isEditing } = state;
 
   const handleSelectField = (fieldId: string) => {
     dispatch({ type: 'SET_ACTIVE_FIELD', fieldId });
@@ -21,7 +21,9 @@ export function FieldPanel() {
           key={group.id}
           group={group}
           activeFieldId={activeFieldId}
+          isEditing={isEditing}
           onSelectField={handleSelectField}
+          dispatch={dispatch}
         />
       ))}
     </div>
