@@ -12,7 +12,7 @@ Validation Station is a standalone React + TypeScript app for human validation o
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Project scaffold, TypeScript types, sample data, and state management
+- [x] **Phase 1: Foundation** - Project scaffold, TypeScript types, sample data, and state management
 - [ ] **Phase 2: App Shell** - Two-panel layout with header and status bar
 - [ ] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
 - [ ] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
@@ -36,8 +36,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Vite + React 19 + TypeScript project with Tailwind CSS v4, define extraction data model types, and create sample invoice data
-- [ ] 01-02-PLAN.md — Build ValidationProvider with useReducer, all state actions, useValidation hook, and wire into App with console-testable dispatch
+- [x] 01-01-PLAN.md — Scaffold Vite + React 19 + TypeScript project with Tailwind CSS v4, define extraction data model types, and create sample invoice data
+- [x] 01-02-PLAN.md — Build ValidationProvider with useReducer, all state actions, useValidation hook, and wire into App with console-testable dispatch
 
 ### Phase 2: App Shell
 **Goal**: The operator sees a full-screen two-panel layout with a header bar and status bar, ready to host document and field content
@@ -159,7 +159,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Planning complete | - |
+| 1. Foundation | 2/2 | Complete | 2026-02-18 |
 | 2. App Shell | 0/TBD | Not started | - |
 | 3. Field Display | 0/TBD | Not started | - |
 | 4. Field Navigation | 0/TBD | Not started | - |
