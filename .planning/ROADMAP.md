@@ -33,11 +33,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. TypeScript types for ExtractionResult, Field, BoundingBox, and TokenBox compile cleanly with all properties defined
   3. Sample data loads in the app representing a realistic multi-group invoice with fields at varying confidence levels
   4. Dispatching state actions (SET_ACTIVE_FIELD, NEXT_FIELD, SET_ZOOM) from the browser console updates state correctly via the ValidationProvider context
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Scaffold Vite + React 19 + TypeScript project with Tailwind CSS v4, define extraction data model types, and create sample invoice data
+- [ ] 01-02-PLAN.md — Build ValidationProvider with useReducer, all state actions, useValidation hook, and wire into App with console-testable dispatch
 
 ### Phase 2: App Shell
 **Goal**: The operator sees a full-screen two-panel layout with a header bar and status bar, ready to host document and field content
@@ -159,7 +159,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/2 | Planning complete | - |
 | 2. App Shell | 0/TBD | Not started | - |
 | 3. Field Display | 0/TBD | Not started | - |
 | 4. Field Navigation | 0/TBD | Not started | - |
