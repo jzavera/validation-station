@@ -27,7 +27,8 @@ export type ValidationAction =
   | { type: 'MARK_MISSING' }
   | { type: 'SET_ZOOM'; zoom: number }
   | { type: 'ZOOM_IN' }
-  | { type: 'ZOOM_OUT' };
+  | { type: 'ZOOM_OUT' }
+  | { type: 'CONFIRM_ALL_FIELDS' };
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -177,6 +178,28 @@ export function validationReducer(
 
     case 'ZOOM_OUT': {
       return { ...state, zoom: clamp(state.zoom * 0.8, 0.25, 4.0) };
+    }
+
+    case 'CONFIRM_ALL_FIELDS': {
+      return {
+        ...state,
+        result: {
+          ...state.result,
+          fieldGroups: state.result.fieldGroups.map((group) => ({
+            ...group,
+            fields: group.fields.map((field) =>
+              field.operatorConfirmed
+                ? field
+                : {
+                    ...field,
+                    operatorConfirmed: true,
+                    validationSource: 'user' as const,
+                  },
+            ),
+          })),
+        },
+        isEditing: false,
+      };
     }
 
     default: {
