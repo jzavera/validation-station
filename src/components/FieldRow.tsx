@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import type { Field } from '../types/extraction';
 import { ConfidenceBadge } from './ConfidenceBadge';
@@ -13,8 +14,18 @@ interface FieldRowProps {
  * Click to select (SET_ACTIVE_FIELD). Active field gets a blue ring.
  */
 export function FieldRow({ field, isActive, onSelect }: FieldRowProps) {
+  const rowRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll the active field into view within the field panel
+  useEffect(() => {
+    if (isActive && rowRef.current) {
+      rowRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [isActive]);
+
   return (
     <div
+      ref={rowRef}
       role="button"
       tabIndex={0}
       onClick={() => onSelect(field.id)}

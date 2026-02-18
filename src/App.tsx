@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { ValidationProvider } from './context/ValidationProvider';
 import { useValidation } from './context/useValidation';
+import { useKeyboardNavigation } from './hooks/useKeyboardNavigation';
 import { sampleExtractionResult } from './data/sampleData';
 import { Header } from './components/Header';
 import { StatusBar } from './components/StatusBar';
@@ -8,6 +9,9 @@ import { FieldPanel } from './components/FieldPanel';
 
 function AppContent() {
   const { state, dispatch } = useValidation();
+
+  // Global keyboard navigation: Tab → next unconfirmed, Shift+Tab → previous
+  useKeyboardNavigation(state, dispatch);
 
   // Expose state and dispatch on window for browser-console testing
   useEffect(() => {

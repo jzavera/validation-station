@@ -84,6 +84,22 @@ function updateField(
   };
 }
 
+/**
+ * Look up a field by ID across all field groups.
+ * Returns undefined if no match is found.
+ */
+function findFieldById(
+  result: ExtractionResult,
+  fieldId: string,
+): Field | undefined {
+  for (const group of result.fieldGroups) {
+    for (const field of group.fields) {
+      if (field.id === fieldId) return field;
+    }
+  }
+  return undefined;
+}
+
 /** Clamp a number between min and max (inclusive). */
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -107,15 +123,24 @@ export function validationReducer(
     }
 
     case 'NEXT_FIELD': {
-      const { fieldOrder, activeFieldId } = state;
+      const { fieldOrder, activeFieldId, result } = state;
       if (activeFieldId === null || fieldOrder.length === 0) return state;
       const currentIndex = fieldOrder.indexOf(activeFieldId);
-      const nextIndex = Math.min(currentIndex + 1, fieldOrder.length - 1);
-      return {
-        ...state,
-        activeFieldId: fieldOrder[nextIndex],
-        isEditing: false,
-      };
+
+      // Search forward for the next unconfirmed field, skipping confirmed ones
+      for (let i = currentIndex + 1; i < fieldOrder.length; i++) {
+        const field = findFieldById(result, fieldOrder[i]);
+        if (field && !field.operatorConfirmed) {
+          return {
+            ...state,
+            activeFieldId: fieldOrder[i],
+            isEditing: false,
+          };
+        }
+      }
+
+      // No unconfirmed field found after current position -- stay on current field
+      return { ...state, isEditing: false };
     }
 
     case 'PREV_FIELD': {
