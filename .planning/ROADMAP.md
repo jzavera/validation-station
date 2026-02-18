@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Field Display** - Field groups with confidence indicators and active field highlighting
 - [x] **Phase 4: Field Navigation** - Tab/Shift+Tab/click navigation between fields
 - [x] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
-- [ ] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
+- [x] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
 - [ ] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
 - [ ] **Phase 8: Bounding Box Overlays** - Token-level and field-level highlights on the document
 - [ ] **Phase 9: Document-Field Synchronization** - Active field triggers document scroll-to-region
@@ -104,10 +104,10 @@ Plans:
   2. Confirming a field sets operatorConfirmed to true and validationSource to "user" in the state
   3. Tab navigation skips fields where operatorConfirmed is true (smart skip behavior)
   4. Clicking "Confirm All" in the header marks every remaining unconfirmed field as confirmed in one action
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 06-01: TBD
+- [x] 06-01-PLAN.md -- Wire Space key to dispatch CONFIRM_FIELD in useKeyboardNavigation
 
 ### Phase 7: Document Rendering
 **Goal**: The operator can view the source document (PDF or image) in the left panel with zoom controls, and the correct renderer is selected automatically
@@ -164,7 +164,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | 3. Field Display | 1/1 | Complete | 2026-02-18 |
 | 4. Field Navigation | 1/1 | Complete | 2026-02-18 |
 | 5. Field Editing | 1/1 | Complete | 2026-02-18 |
-| 6. Field Validation | 0/TBD | Not started | - |
+| 6. Field Validation | 1/1 | Complete | 2026-02-18 |
 | 7. Document Rendering | 0/TBD | Not started | - |
 | 8. Bounding Box Overlays | 0/TBD | Not started | - |
 | 9. Document-Field Sync | 0/TBD | Not started | - |

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Operator can efficiently review and validate every extracted field by navigating with Tab, editing values inline, and visually confirming each extraction against the highlighted source document region.
-**Current focus:** Phase 5 complete -- ready for Phase 6 (Field Validation)
+**Current focus:** Phase 6 complete -- ready for Phase 7 (Document Rendering)
 
 ## Current Position
 
-Phase: 5 of 9 (Field Editing) -- COMPLETE
+Phase: 6 of 9 (Field Validation) -- COMPLETE
 Plan: 1 of 1 in current phase
 Status: Phase Complete
-Last activity: 2026-02-18 -- Completed 05-01 (Inline Field Editing)
+Last activity: 2026-02-18 -- Completed 06-01 (Field Validation)
 
-Progress: [#####.....] 55%
+Progress: [######....] 67%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 4min
-- Total execution time: 0.4 hours
+- Total execution time: 0.5 hours
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: [#####.....] 55%
 | 03-field-display | 1 | 5min | 5min |
 | 04-field-navigation | 1 | 4min | 4min |
 | 05-field-editing | 1 | 4min | 4min |
+| 06-field-validation | 1 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (2min), 02-01 (3min), 03-01 (5min), 04-01 (4min), 05-01 (4min)
+- Last 5 plans: 02-01 (3min), 03-01 (5min), 04-01 (4min), 05-01 (4min), 06-01 (3min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -72,6 +73,7 @@ Recent decisions affecting current work:
 - (05-01) Global handler checks target.tagName to skip INPUT/TEXTAREA elements
 - (05-01) FieldRow click handler only fires onSelect when NOT already active (prevents deselect)
 - (05-01) +/= both trigger ZOOM_IN for keyboard layout compatibility
+- (06-01) Space dispatches CONFIRM_FIELD; all other validation infrastructure was already in place from Phases 1-5
 
 ### Pending Todos
 
@@ -84,5 +86,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 05-01-PLAN.md (Phase 05 complete)
-Resume file: .planning/phases/05-field-editing/05-01-SUMMARY.md
+Stopped at: Completed 06-01-PLAN.md (Phase 06 complete)
+Resume file: .planning/phases/06-field-validation/06-01-SUMMARY.md
