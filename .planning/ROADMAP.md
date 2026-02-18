@@ -47,10 +47,10 @@ Plans:
   1. App renders a full-screen view split into a left panel (55%) and right panel (45%) with no scrollbar on the outer shell
   2. Header bar displays the app title, zoom control buttons (+/-/reset), and a "Confirm All" button
   3. Status bar at the bottom shows the current field position (e.g., "Field 1/12") and keyboard shortcut hints
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Build full-screen App Shell with Header (title, zoom controls, Confirm All), two-panel split layout (55/45), StatusBar (field position, keyboard hints), and wire to state
 
 ### Phase 3: Field Display
 **Goal**: The operator can see all extracted fields organized by groups, with confidence indicators showing extraction quality at a glance
@@ -160,7 +160,7 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-02-18 |
-| 2. App Shell | 0/TBD | Not started | - |
+| 2. App Shell | 0/1 | In progress | - |
 | 3. Field Display | 0/TBD | Not started | - |
 | 4. Field Navigation | 0/TBD | Not started | - |
 | 5. Field Editing | 0/TBD | Not started | - |
