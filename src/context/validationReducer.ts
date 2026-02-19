@@ -28,7 +28,9 @@ export type ValidationAction =
   | { type: 'SET_ZOOM'; zoom: number }
   | { type: 'ZOOM_IN' }
   | { type: 'ZOOM_OUT' }
-  | { type: 'CONFIRM_ALL_FIELDS' };
+  | { type: 'CONFIRM_ALL_FIELDS' }
+  | { type: 'CAPTURE_MISSING'; pageNumber: number; x: number; y: number }
+  | { type: 'CAPTURE_VALUE'; value: string; boundingBox: { pageNumber: number; x: number; y: number; width: number; height: number } };
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -53,7 +55,7 @@ export function initializeState(result: ExtractionResult): ValidationState {
   return {
     result,
     fieldOrder,
-    activeFieldId: fieldOrder.length > 0 ? fieldOrder[0] : null,
+    activeFieldId: null,
     isEditing: false,
     zoom: 1.0,
   };
@@ -124,7 +126,19 @@ export function validationReducer(
 
     case 'NEXT_FIELD': {
       const { fieldOrder, activeFieldId, result } = state;
-      if (activeFieldId === null || fieldOrder.length === 0) return state;
+      if (fieldOrder.length === 0) return state;
+
+      // If no field is active, select the first unconfirmed field
+      if (activeFieldId === null) {
+        for (let i = 0; i < fieldOrder.length; i++) {
+          const field = findFieldById(result, fieldOrder[i]);
+          if (field && !field.operatorConfirmed) {
+            return { ...state, activeFieldId: fieldOrder[i], isEditing: false };
+          }
+        }
+        return { ...state, activeFieldId: fieldOrder[0], isEditing: false };
+      }
+
       const currentIndex = fieldOrder.indexOf(activeFieldId);
 
       // Search forward for the next unconfirmed field, skipping confirmed ones
@@ -225,6 +239,53 @@ export function validationReducer(
         },
         isEditing: false,
       };
+    }
+
+    case 'CAPTURE_VALUE': {
+      if (state.activeFieldId === null) return state;
+      const bbox = action.boundingBox;
+      const newState = updateField(state, (field) => ({
+        ...field,
+        extractedValue: action.value,
+        isMissing: false,
+        dataVersion: field.dataVersion + 1,
+        validationSource: 'user' as const,
+        boundingBox: bbox,
+        tokens: [{ text: action.value, boundingBox: bbox }],
+      }));
+      return { ...newState, isEditing: false };
+    }
+
+    case 'CAPTURE_MISSING': {
+      if (state.activeFieldId === null) return state;
+      const activeField = findFieldById(state.result, state.activeFieldId);
+      if (!activeField || !activeField.isMissing) return state;
+
+      // Set bounding box at click position and enter edit mode
+      const newState = updateField(state, (field) => ({
+        ...field,
+        isMissing: false,
+        boundingBox: {
+          pageNumber: action.pageNumber,
+          x: Math.max(0, action.x - 0.05),
+          y: Math.max(0, action.y - 0.005),
+          width: 0.1,
+          height: 0.012,
+        },
+        tokens: [
+          {
+            text: '',
+            boundingBox: {
+              pageNumber: action.pageNumber,
+              x: Math.max(0, action.x - 0.05),
+              y: Math.max(0, action.y - 0.005),
+              width: 0.1,
+              height: 0.012,
+            },
+          },
+        ],
+      }));
+      return { ...newState, isEditing: true };
     }
 
     default: {

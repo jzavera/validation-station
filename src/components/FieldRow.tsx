@@ -54,6 +54,7 @@ export function FieldRow({ field, isActive, isEditing, onSelect, dispatch }: Fie
       ref={rowRef}
       role="button"
       tabIndex={0}
+      data-field-active={isActive || undefined}
       onClick={() => {
         if (!isActive) {
           onSelect(field.id);
@@ -80,6 +81,7 @@ export function FieldRow({ field, isActive, isEditing, onSelect, dispatch }: Fie
         confidence={field.confidence}
         operatorConfirmed={field.operatorConfirmed}
         isMissing={field.isMissing}
+        hasEmptyValue={!field.isMissing && field.extractedValue === ''}
       />
 
       {/* Field label */}
@@ -88,8 +90,10 @@ export function FieldRow({ field, isActive, isEditing, onSelect, dispatch }: Fie
       </span>
 
       {/* Extracted value (editable when active + editing) */}
-      {field.isMissing ? (
-        <span className="text-sm text-gray-400 italic">Missing</span>
+      {field.isMissing && !(isActive && isEditing) ? (
+        <span className="text-sm text-gray-400 italic">Missing — click document to capture</span>
+      ) : !field.isMissing && field.extractedValue === '' && !(isActive && isEditing) ? (
+        <span className="text-sm text-red-400 italic">Empty — click text on document</span>
       ) : (
         <EditableValue
           value={field.extractedValue}

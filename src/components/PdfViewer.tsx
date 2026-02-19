@@ -2,19 +2,25 @@ import { forwardRef, useState, useCallback } from 'react';
 import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
+import type { Field } from '../types/extraction';
+import type { ValidationAction } from '../context/validationReducer';
+import { BoundingBoxOverlay } from './BoundingBoxOverlay';
 
 interface PdfViewerProps {
   sourceUrl: string;
   zoom: number;
+  activeField: Field | null;
+  dispatch: React.Dispatch<ValidationAction>;
 }
 
 /**
  * Renders a multi-page PDF document in a scrollable container.
- * Each page is wrapped in a position:relative div for future overlay support.
+ * Each page is wrapped in a position:relative div for overlay support.
  * The ref is forwarded to the scroll container for scroll-to-field (Phase 9).
+ * Bounding box overlays for the active field are rendered inside each page wrapper.
  */
 export const PdfViewer = forwardRef<HTMLDivElement, PdfViewerProps>(
-  function PdfViewer({ sourceUrl, zoom }, ref) {
+  function PdfViewer({ sourceUrl, zoom, activeField, dispatch }, ref) {
     const [numPages, setNumPages] = useState<number>(0);
     const [error, setError] = useState<string | null>(null);
 
@@ -29,6 +35,50 @@ export const PdfViewer = forwardRef<HTMLDivElement, PdfViewerProps>(
     const onDocumentLoadError = useCallback(() => {
       setError('Failed to load PDF document');
     }, []);
+
+    // Whether the active field needs a value (missing or empty)
+    const needsCapture = activeField != null &&
+      (activeField.isMissing || activeField.extractedValue === '');
+
+    const handlePageClick = useCallback(
+      (pageNumber: number, e: React.MouseEvent<HTMLDivElement>) => {
+        if (!activeField) return;
+        const fieldNeedsValue = activeField.isMissing || activeField.extractedValue === '';
+        if (!fieldNeedsValue) return;
+
+        // Check if user clicked on a text layer span
+        const target = e.target as HTMLElement;
+        if (target instanceof HTMLSpanElement && target.closest('.textLayer')) {
+          const text = (target.textContent || '').trim();
+          if (!text) return;
+
+          // Calculate normalized bounding box from the span's position
+          const pageWrapper = e.currentTarget;
+          const pageRect = pageWrapper.getBoundingClientRect();
+          const spanRect = target.getBoundingClientRect();
+
+          const bbox = {
+            pageNumber,
+            x: (spanRect.left - pageRect.left) / pageRect.width,
+            y: (spanRect.top - pageRect.top) / pageRect.height,
+            width: spanRect.width / pageRect.width,
+            height: spanRect.height / pageRect.height,
+          };
+
+          dispatch({ type: 'CAPTURE_VALUE', value: text, boundingBox: bbox });
+          return;
+        }
+
+        // Fallback: clicked on empty space — set bounding box at click position and enter edit mode
+        if (activeField.isMissing) {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          dispatch({ type: 'CAPTURE_MISSING', pageNumber, x, y });
+        }
+      },
+      [activeField, dispatch],
+    );
 
     if (error) {
       return (
@@ -73,14 +123,19 @@ export const PdfViewer = forwardRef<HTMLDivElement, PdfViewerProps>(
             {Array.from({ length: numPages }, (_, index) => (
               <div
                 key={`page-${index + 1}`}
-                className="relative shadow-md"
+                className={`relative shadow-md ${needsCapture ? 'capture-mode' : ''}`}
                 data-page-number={index + 1}
+                onClick={(e) => handlePageClick(index + 1, e)}
               >
                 <Page
                   pageNumber={index + 1}
                   scale={zoom}
                   renderTextLayer={true}
                   renderAnnotationLayer={true}
+                />
+                <BoundingBoxOverlay
+                  activeField={activeField}
+                  pageNumber={index + 1}
                 />
               </div>
             ))}

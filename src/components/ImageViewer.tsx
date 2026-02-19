@@ -1,23 +1,40 @@
 import { forwardRef, useState, useCallback } from 'react';
+import type { Field } from '../types/extraction';
+import type { ValidationAction } from '../context/validationReducer';
+import { BoundingBoxOverlay } from './BoundingBoxOverlay';
 
 interface ImageViewerProps {
   sourceUrl: string;
   zoom: number;
+  activeField: Field | null;
+  dispatch: React.Dispatch<ValidationAction>;
 }
 
 /**
  * Renders a single image document in a scrollable container.
- * The image is wrapped in a position:relative div for future overlay support.
+ * The image is wrapped in a position:relative div for overlay support.
  * Zoom is applied via CSS transform with transform-origin: top left.
  * The ref is forwarded to the scroll container for scroll-to-field (Phase 9).
+ * Bounding box overlays for the active field are rendered inside the image wrapper.
  */
 export const ImageViewer = forwardRef<HTMLDivElement, ImageViewerProps>(
-  function ImageViewer({ sourceUrl, zoom }, ref) {
+  function ImageViewer({ sourceUrl, zoom, activeField, dispatch }, ref) {
     const [hasError, setHasError] = useState(false);
 
     const onError = useCallback(() => {
       setHasError(true);
     }, []);
+
+    const handlePageClick = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!activeField?.isMissing) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        dispatch({ type: 'CAPTURE_MISSING', pageNumber: 1, x, y });
+      },
+      [activeField, dispatch],
+    );
 
     if (hasError) {
       return (
@@ -52,12 +69,13 @@ export const ImageViewer = forwardRef<HTMLDivElement, ImageViewerProps>(
       <div ref={ref} className="h-full w-full overflow-auto">
         <div className="p-4">
           <div
-            className="relative inline-block shadow-md"
+            className={`relative inline-block shadow-md ${activeField?.isMissing ? 'cursor-crosshair' : ''}`}
             style={{
               transform: `scale(${zoom})`,
               transformOrigin: 'top left',
             }}
             data-page-number={1}
+            onClick={handlePageClick}
           >
             <img
               src={sourceUrl}
@@ -65,6 +83,10 @@ export const ImageViewer = forwardRef<HTMLDivElement, ImageViewerProps>(
               onError={onError}
               className="block max-w-none"
               draggable={false}
+            />
+            <BoundingBoxOverlay
+              activeField={activeField}
+              pageNumber={1}
             />
           </div>
         </div>

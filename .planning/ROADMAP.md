@@ -19,8 +19,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Field Editing** - Inline editing with Enter/Escape/Tab and dataVersion tracking
 - [x] **Phase 6: Field Validation** - Space to confirm, Confirm All, smart Tab skip of confirmed fields
 - [x] **Phase 7: Document Rendering** - PDF and image rendering with zoom controls
-- [ ] **Phase 8: Bounding Box Overlays** - Token-level and field-level highlights on the document
-- [ ] **Phase 9: Document-Field Synchronization** - Active field triggers document scroll-to-region
+- [x] **Phase 8: Bounding Box Overlays** - Token-level and field-level highlights on the document
+- [x] **Phase 9: Document-Field Synchronization** - Active field triggers document scroll-to-region
 
 ## Phase Details
 
@@ -132,10 +132,10 @@ Plans:
   2. If a field has no tokens, the field-level boundingBox is highlighted instead (fallback behavior)
   3. Overlays use normalized 0-1 coordinates with percentage-based CSS positioning, staying correctly aligned during zoom changes
   4. Only the active field's overlays are rendered on the document (no visual clutter from inactive fields)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 08-01: TBD
+- [x] 08-01-PLAN.md -- BoundingBoxOverlay component, wire into PdfViewer and ImageViewer with activeField derivation
 
 ### Phase 9: Document-Field Synchronization
 **Goal**: The operator experiences seamless connection between the field panel and document viewer -- activating a field automatically scrolls the document to show the relevant extraction region
@@ -145,10 +145,10 @@ Plans:
   1. When a field becomes active, the document viewer scrolls to center the field's bounding box region in the viewport
   2. Scroll-to-field works correctly across pages in a multi-page PDF document
   3. The scroll animation is smooth (not an instant jump), providing clear visual feedback of the document moving to the relevant region
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 09-01: TBD
+- [x] 09-01-PLAN.md -- useDocumentScroll hook, wire into DocumentViewer for smooth scroll-to-field
 
 ## Progress
 
@@ -166,5 +166,5 @@ Note: Phases 3-6 (field interactions) and Phase 7 (document rendering) share onl
 | 5. Field Editing | 1/1 | Complete | 2026-02-18 |
 | 6. Field Validation | 1/1 | Complete | 2026-02-18 |
 | 7. Document Rendering | 1/1 | Complete | 2026-02-18 |
-| 8. Bounding Box Overlays | 0/TBD | Not started | - |
-| 9. Document-Field Sync | 0/TBD | Not started | - |
+| 8. Bounding Box Overlays | 1/1 | Complete | 2026-02-18 |
+| 9. Document-Field Sync | 1/1 | Complete | 2026-02-18 |

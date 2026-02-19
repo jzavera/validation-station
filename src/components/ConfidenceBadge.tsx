@@ -4,6 +4,7 @@ interface ConfidenceBadgeProps {
   confidence: number;
   operatorConfirmed: boolean;
   isMissing: boolean;
+  hasEmptyValue?: boolean;
 }
 
 /**
@@ -17,6 +18,7 @@ export function ConfidenceBadge({
   confidence,
   operatorConfirmed,
   isMissing,
+  hasEmptyValue,
 }: ConfidenceBadgeProps) {
   // Confirmed: green checkmark
   if (operatorConfirmed) {
@@ -37,6 +39,18 @@ export function ConfidenceBadge({
             clipRule="evenodd"
           />
         </svg>
+      </span>
+    );
+  }
+
+  // Empty value: red dot (field was cleared)
+  if (hasEmptyValue && !isMissing) {
+    return (
+      <span
+        className="flex items-center justify-center w-5 h-5 shrink-0"
+        aria-label="Confidence: Empty"
+      >
+        <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-500" />
       </span>
     );
   }

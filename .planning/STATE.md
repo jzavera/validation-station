@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Operator can efficiently review and validate every extracted field by navigating with Tab, editing values inline, and visually confirming each extraction against the highlighted source document region.
-**Current focus:** Phase 7 complete -- ready for Phase 8 (Bounding Box Overlays)
+**Current focus:** ALL PHASES COMPLETE -- Project finished
 
 ## Current Position
 
-Phase: 7 of 9 (Document Rendering) -- COMPLETE
+Phase: 9 of 9 (Document-Field Synchronization) -- COMPLETE
 Plan: 1 of 1 in current phase
-Status: Phase Complete
-Last activity: 2026-02-18 -- Completed 07-01 (Document Rendering)
+Status: PROJECT COMPLETE
+Last activity: 2026-02-18 -- Completed 09-01 (Document-Field Synchronization)
 
-Progress: [#######...] 78%
+Progress: [##########] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 10
 - Average duration: 4min
-- Total execution time: 0.5 hours
+- Total execution time: ~0.6 hours
 
 **By Phase:**
 
@@ -34,9 +34,11 @@ Progress: [#######...] 78%
 | 05-field-editing | 1 | 4min | 4min |
 | 06-field-validation | 1 | 3min | 3min |
 | 07-document-rendering | 1 | 4min | 4min |
+| 08-bounding-box-overlays | 1 | 3min | 3min |
+| 09-document-field-sync | 1 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (5min), 04-01 (4min), 05-01 (4min), 06-01 (3min), 07-01 (4min)
+- Last 5 plans: 06-01 (3min), 07-01 (4min), 08-01 (3min), 09-01 (3min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -80,17 +82,23 @@ Recent decisions affecting current work:
 - (07-01) Both viewers wrap content in position:relative divs with data-page-number for Phase 8 overlay targeting
 - (07-01) Error states show centered icon + message fallback rather than crashing
 - (07-01) Outer panel uses overflow-hidden; inner viewers manage their own scrolling
+- (08-01) BoundingBoxOverlay is a pure presentational component -- no context dependency, receives everything via props
+- (08-01) activeField derivation uses useMemo in DocumentViewer for efficient re-computation
+- (08-01) Overlay container uses absolute inset-0 to cover the full page area
+- (09-01) useDocumentScroll hook runs in DocumentViewer where both scrollRef and activeField are available
+- (09-01) zoom included as dependency so scroll re-triggers if zoom changes while a field is active
+- (09-01) scrollTo target clamped to Math.max(0, ...) to prevent negative scroll positions
 
 ### Pending Todos
 
-None yet.
+None -- project complete.
 
 ### Blockers/Concerns
 
-None yet.
+None.
 
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 07-01-PLAN.md (Phase 07 complete)
-Resume file: .planning/phases/07-document-rendering/07-01-SUMMARY.md
+Stopped at: ALL PHASES COMPLETE
+Resume file: N/A -- project finished

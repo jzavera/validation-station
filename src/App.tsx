@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { StatusBar } from './components/StatusBar';
 import { FieldPanel } from './components/FieldPanel';
 import { DocumentViewer } from './components/DocumentViewer';
+import { ConnectorLines } from './components/ConnectorLines';
 
 function AppContent() {
   const { state, dispatch } = useValidation();
@@ -22,6 +23,7 @@ function AppContent() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
+      <ConnectorLines />
       <Header />
 
       <main className="flex-1 flex min-h-0">
